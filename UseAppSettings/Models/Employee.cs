@@ -4,7 +4,7 @@
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public decimal Salary { get; set; }
+        public decimal Salary { get; set; }  
         public int? DeptId { get; set; }
         public int? Manager { get; set; }
         public DateOnly? CreatedDate { get; set; }
