@@ -1,5 +1,7 @@
-trigger: - main
-pool: vmImage: ubuntu-latest
+trigger: 
+- main
+pool: 
+  name: Default
 
 steps:
 - checkout : self
@@ -7,12 +9,17 @@ steps:
 - task : UseDotNet@2
   inputs : 
     packageType : sdk
-    version : '8.0.25'
+    version : '8.0.x'
+
+- script : echo "Pipeline Start"
+  displayName : Start Pipeline
 
 - script : dotnet restore
   displayName : Restore Packages
 
 - script : dotnet build --configuration Release
-  displayName : Build Application
+  displayName : Build Application 
 
-echo "Pipeline Started"
+- script : dotnet --info
+  displayName: Display .Net Information
+
