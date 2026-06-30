@@ -15,6 +15,12 @@ steps:
 - script : dotnet build --configuration Release
   displayName : Build Application 
 
+- script : dotnet test --no-build
+  displayName: Run Unit Tests
+
+- script : dotnet publish --configuration Release --output $(Build.ArtifactStagingDirectory)
+  displayName: Publish Application
+
 - script : dotnet --info
   displayName: Display .Net Information
 

@@ -18,11 +18,15 @@ namespace UseAzureKeyVault
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //Step 1 : Create secret client
             var client = new SecretClient(
                 new Uri("https://snehap-keyvault-demo.vault.azure.net/"),
                 new DefaultAzureCredential());
 
+            //Step 2 :Get secret
             var conn = client.GetSecret("DefaultDapperConnection").Value.Value;
+
+            //Step 3 : Use conn ie secret value
             Console.WriteLine($"ConnectionString: {conn}");
             builder.Services.AddDbContext<AppDbContext>(options =>
             {

@@ -18,12 +18,16 @@ namespace UseAWSSecrets
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //Step 1 : Create client
             var client = new AmazonSecretsManagerClient();
+
+            //Step 2: get value
             var response =await  client.GetSecretValueAsync(new GetSecretValueRequest
             {
                 SecretId = "DefaultDapperConnection1"
             });
-
+            
+            //Step 3: Use secret
             string conn = response.SecretString;
             Console.WriteLine($"ConnectionString: {conn}");
             Console.WriteLine("------------------------------------------------");
