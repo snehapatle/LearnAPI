@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using UseAppSettings.Models;
 
 namespace UseAppSettings
 {
@@ -24,11 +25,11 @@ namespace UseAppSettings
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
+            //if (app.Environment.IsDevelopment())
+            //{
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+            //}
 
             app.UseHttpsRedirection();
 
@@ -36,6 +37,11 @@ namespace UseAppSettings
 
 
             app.MapControllers();
+
+            app.MapPost("/employeepost", (Employee emp) =>
+            {
+                return Results.Created($"employee created {emp}", emp);
+            }).WithName("Minimal").WithTags("Minimal API");
             app.MapGet("/Health", () =>            
             "Healthy app").WithTags("Health End");
 
